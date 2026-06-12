@@ -1,0 +1,136 @@
+:root {
+    --primary: #2563EB;      /* Professional Blue */
+    --primary-dark: #1d4ed8;
+    --bg-light: #F3F4F6;
+    --white: #ffffff;
+    --text-dark: #111827;
+    --text-gray: #6B7280;
+    --green: #10B981;        /* Success/Save Color */
+    --red: #EF4444;          /* Surge Color */
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+
+body { background-color: var(--bg-light); height: 100vh; overflow: hidden; color: var(--text-dark); }
+
+/* --- LOGIN SCREEN --- */
+.full-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; background: var(--white); display: none; }
+.full-screen.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+/* Background Image for Login */
+.login-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2670&auto=format&fit=crop') no-repeat center center/cover;
+    opacity: 0.1; z-index: -1;
+}
+
+.auth-card {
+    background: var(--white); width: 90%; max-width: 400px; padding: 40px;
+    border-radius: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.brand-title { font-size: 2rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; margin-bottom: 5px; }
+.brand-subtitle { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 30px; }
+
+.input-group { text-align: left; margin-bottom: 20px; }
+.input-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+.input-wrapper { display: flex; align-items: center; background: var(--bg-light); border-radius: 12px; padding: 12px; border: 1px solid #E5E7EB; transition: 0.2s; }
+.input-wrapper:focus-within { border-color: var(--primary); background: var(--white); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+.input-wrapper input { border: none; background: transparent; width: 100%; font-size: 1rem; outline: none; margin-left: 10px; color: var(--text-dark); }
+
+.btn-primary {
+    width: 100%; padding: 16px; background: var(--primary); color: white;
+    border: none; border-radius: 12px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: 0.2s;
+}
+.btn-primary:hover { background: var(--primary-dark); }
+
+/* --- OTP & LOADERS --- */
+.otp-container { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+.otp-container input { width: 50px; height: 50px; border: 1px solid #E5E7EB; border-radius: 8px; text-align: center; font-size: 1.5rem; outline: none; transition: 0.2s; }
+.otp-container input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+
+/* --- MAIN APP LAYOUT --- */
+#app-section { position: relative; width: 100%; height: 100%; display: none; }
+#app-section.active { display: block; }
+
+#map { width: 100%; height: 100%; z-index: 0; }
+
+.top-bar {
+    position: absolute; top: 20px; left: 20px; right: 20px; z-index: 10;
+    display: flex; justify-content: space-between;
+}
+.icon-btn {
+    width: 48px; height: 48px; background: var(--white); border-radius: 50%;
+    box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1.2rem; color: var(--text-dark);
+}
+
+/* --- BOTTOM SHEET (The Slide-up Panel) --- */
+.bottom-sheet {
+    position: absolute; bottom: 0; left: 0; width: 100%;
+    background: var(--white);
+    border-radius: 24px 24px 0 0;
+    box-shadow: var(--card-shadow);
+    padding: 24px; z-index: 20;
+    transform: translateY(110%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 80vh; display: flex; flex-direction: column;
+}
+.bottom-sheet.active { transform: translateY(0); }
+
+.drag-handle { width: 40px; height: 5px; background: #E5E7EB; border-radius: 10px; margin: 0 auto 20px; }
+
+/* Filter Tabs (Bike, AC, SUV...) */
+.vehicle-tabs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 15px; scrollbar-width: none; }
+.tab {
+    padding: 8px 16px; background: var(--bg-light); border-radius: 20px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; color: var(--text-gray); cursor: pointer; border: 1px solid transparent;
+}
+.tab.active { background: #EFF6FF; color: var(--primary); border-color: var(--primary); }
+
+/* Ride Cards */
+.ride-list { overflow-y: auto; padding-bottom: 20px; }
+
+.ride-card {
+    display: flex; flex-direction: column;
+    background: var(--white); border: 1px solid #E5E7EB;
+    border-radius: 16px; padding: 16px; margin-bottom: 12px;
+    cursor: pointer; transition: 0.2s; position: relative;
+}
+.ride-card:hover { border-color: var(--primary); box-shadow: var(--shadow); }
+.ride-card.recommended { border: 2px solid var(--primary); background: #FBFDFF; }
+
+/* Top Row of Card */
+.ride-main { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.provider-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: contain; margin-right: 12px; }
+.ride-details { flex: 1; }
+.ride-title { font-weight: 700; font-size: 1rem; color: var(--text-dark); display: flex; align-items: center; gap: 8px; }
+.ride-meta { font-size: 0.85rem; color: var(--text-gray); display: flex; gap: 10px; margin-top: 4px; }
+.ride-price { text-align: right; }
+.price-tag { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); display: block; }
+.old-price { font-size: 0.85rem; text-decoration: line-through; color: var(--text-gray); display: none; }
+
+/* Wait & Save Section */
+.wait-save-area {
+    margin-top: 12px; padding-top: 12px; border-top: 1px dashed #E5E7EB;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.wait-btn {
+    background: #ECFDF5; color: var(--green); border: 1px solid var(--green);
+    padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+}
+.wait-btn:hover { background: var(--green); color: white; }
+
+/* Multi-Modal Design */
+.multi-modal-path { display: flex; align-items: center; gap: 5px; margin-top: 5px; font-size: 0.8rem; color: var(--text-dark); font-weight: 600; }
+.path-icon { color: var(--text-gray); }
+
+/* Driver Arriving Panel */
+.driver-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.status-badge { background: var(--text-dark); color: white; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+.driver-profile { display: flex; gap: 15px; align-items: center; }
+.driver-img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+
+/* Animations */
+@keyframes spin { to { transform: rotate(360deg); } }

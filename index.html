@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pillion | Professional Mobility</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="auth-section" class="full-screen active">
+        <div class="login-bg"></div>
+        <div class="auth-card">
+            <div class="brand-title">Pillion</div>
+            <p class="brand-subtitle">One App. Every Ride.</p>
+
+            <div id="step-mobile">
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <div class="input-wrapper">
+                        <span style="font-weight:600; color:#6B7280">+91</span>
+                        <input type="tel" id="mobileInput" placeholder="99999 99999" maxlength="10">
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="sendOtp()">Continue</button>
+            </div>
+
+            <div id="step-otp" style="display:none;">
+                <p style="margin-bottom:20px; font-size:0.9rem;">Enter the code sent to your mobile</p>
+                <div class="otp-container">
+                    <input type="text" maxlength="1" id="otp1">
+                    <input type="text" maxlength="1" id="otp2">
+                    <input type="text" maxlength="1" id="otp3">
+                    <input type="text" maxlength="1" id="otp4">
+                </div>
+                <button class="btn-primary" onclick="verifyOtp()">Verify & Login</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="app-section">
+        <div id="map"></div> <div class="top-bar">
+            <div class="icon-btn"><i class="fa-solid fa-bars"></i></div>
+            <div class="icon-btn"><i class="fa-regular fa-user"></i></div>
+        </div>
+
+        <div id="panel-search" class="bottom-sheet active">
+            <div class="drag-handle"></div>
+            
+            <h3 style="margin-bottom: 15px;">Where to?</h3>
+            
+            <div style="display:flex; flex-direction:column; gap:12px; margin-bottom: 20px;">
+                <div class="input-wrapper" style="padding:10px;">
+                    <i class="fa-solid fa-circle" style="color:#10B981; font-size:10px; margin-right:10px;"></i>
+                    <input type="text" value="Indiranagar, Bangalore" readonly style="font-weight:600;">
+                </div>
+                <div class="input-wrapper" style="padding:10px;">
+                    <i class="fa-solid fa-square" style="color:#111827; font-size:10px; margin-right:10px;"></i>
+                    <input type="text" id="destInput" placeholder="Search destination">
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="searchRides()">Search Rides</button>
+        </div>
+
+        <div id="panel-rides" class="bottom-sheet">
+            <div class="drag-handle"></div>
+            
+            <div class="vehicle-tabs">
+                <div class="tab active">All</div>
+                <div class="tab">Bike</div>
+                <div class="tab">Auto</div>
+                <div class="tab">AC Cabs</div>
+                <div class="tab">SUV</div>
+                <div class="tab">Public Transport</div>
+            </div>
+
+            <div id="rides-list" class="ride-list">
+                </div>
+        </div>
+
+        <div id="panel-driver" class="bottom-sheet">
+            <div class="driver-panel-header">
+                <div style="font-size:1.1rem; font-weight:700;">Arriving in <span id="arrival-time">10</span> min</div>
+                <div class="status-badge">CONFIRMED</div>
+            </div>
+            
+            <div class="driver-profile">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" class="driver-img">
+                <div>
+                    <h4 style="margin-bottom:4px;">Rajesh K.</h4>
+                    <p style="color:gray; font-size:0.9rem;">White Swift Dzire • KA 01 HK 8822</p>
+                    <div style="display:flex; gap:10px; margin-top:5px; font-size:0.85rem;">
+                        <span><i class="fa-solid fa-star" style="color:gold;"></i> 4.9</span>
+                        <span>• Uber Go</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display:flex; gap:10px; margin-top:25px;">
+                <button class="btn-primary" style="background:#10B981;">Call Driver</button>
+                <button class="btn-primary" style="background:#F3F4F6; color:black;" onclick="location.reload()">Cancel</button>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
